@@ -23,7 +23,6 @@ import { NotificationCenter } from '@/components/NotificationCenter'
 import { PageTransition } from '@/components/PageTransition'
 import { ConnectionStatus } from '@/components/ConnectionStatus'
 import { useWebSocket } from '@/hooks/useWebSocket'
-import { useTheme } from '@/contexts/ThemeContext'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
