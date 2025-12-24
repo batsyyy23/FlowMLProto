@@ -17,7 +17,6 @@ const mockModels = [
 
 export function Results() {
   const navigate = useNavigate()
-  const bestModel = mockModels[0]
 
   return (
     <div className="space-y-6">
