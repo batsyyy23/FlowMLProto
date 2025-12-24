@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 240 4.8% 95.9%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 240 4.8% 95.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 240 4.8% 95.9%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 263.4 70% 45%;
+    --secondary: 217.2 91.2% 59.8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 240 4.8% 95.9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 240 4.8% 95.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 263.4 70% 50.4%;
+    --radius: 0.5rem;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 263.4 70% 45%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 263.4 70% 50.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    transition-property: background-color, border-color, color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Card Hover Effects with Neon Gradient GLOW */
+@layer components {
+  .card-glow-wrapper {
+    position: relative;
+    isolation: isolate;
+  }
+  
+  .card-glow-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    opacity: 0;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(20px);
+    border-radius: 12px;
+  }
+  
+  .card-glow-wrapper:has(.card-hover:hover)::before {
+    opacity: 0.5;
+  }
+  
+  /* Match card gradient colors for glow */
+  .card-glow-wrapper:has([class*="from-purple-500"])::before { background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-yellow-500"])::before { background: radial-gradient(circle, rgba(234, 179, 8, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-green-500"])::before { background: radial-gradient(circle, rgba(34, 197, 94, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-blue-500"])::before { background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-cyan-500"])::before { background: radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-red-500"])::before { background: radial-gradient(circle, rgba(239, 68, 68, 0.6) 0%, transparent 70%); }
+  .card-glow-wrapper:has([class*="from-orange-500"])::before { background: radial-gradient(circle, rgba(249, 115, 22, 0.6) 0%, transparent 70%); }
+  
+  .card-hover {
+    position: relative;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Page Transitions */
+  .page-transition-enter {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  
+  .page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+  
+  .page-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .page-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 200ms ease-in, transform 200ms ease-in;
+  }
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(24, 24, 27, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(63, 63, 70, 0.3);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(228, 228, 231, 0.5);
+}
+
+.glass-strong {
+  background: rgba(24, 24, 27, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(63, 63, 70, 0.5);
+}
+
+.light .glass-strong {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(228, 228, 231, 0.7);
+}
+
+/* Grid animation for landing page */
+@keyframes grid-pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.grid-animate {
+  animation: grid-pulse 4s ease-in-out infinite;
+}
